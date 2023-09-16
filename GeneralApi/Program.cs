@@ -13,6 +13,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("", () => "Hello, world!");
+app.MapHelloEndpoints();
 
 app.Run();
