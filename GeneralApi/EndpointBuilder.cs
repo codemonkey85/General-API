@@ -2,6 +2,7 @@
 
 public static class EndpointBuilder
 {
-    public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder app) =>
-        app.MapHelloEndpoints();
+    public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder app) => app
+        .MapHelloEndpoints()
+        .MapAvmApiEndpoints();
 }

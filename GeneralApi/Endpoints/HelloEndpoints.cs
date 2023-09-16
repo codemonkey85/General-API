@@ -8,7 +8,7 @@ public static class HelloEndpoints
     {
         var helloGroup = apiGroup.MapGroup("/hello");
 
-        helloGroup.MapGet("", HelloName);
+        helloGroup.MapGet("/", HelloName);
         helloGroup.MapGet("/{name}", (string name) => HelloName(name));
 
         return apiGroup;
