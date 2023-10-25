@@ -4,7 +4,7 @@ public static class EndpointBuilder
 {
     public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("", () => Results.Redirect("/swagger"));
+        app.MapGet("/", () => Results.Redirect("/swagger"));
 
         return app
             .MapHelloEndpoints()

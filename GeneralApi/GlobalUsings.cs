@@ -1,4 +1,5 @@
-﻿global using GeneralApi;
+﻿global using System.Diagnostics.CodeAnalysis;
+global using GeneralApi;
 global using GeneralApi.Endpoints;
 global using Microsoft.AspNetCore.Http.HttpResults;
 global using Microsoft.AspNetCore.Mvc;

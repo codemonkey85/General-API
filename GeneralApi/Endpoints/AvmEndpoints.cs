@@ -1,10 +1,10 @@
 ﻿namespace GeneralApi.Endpoints;
 
-public static class AvmApi
+public static class AvmEndpoints
 {
     private const string youTubeUrl = "https://www.youtube.com";
     private const string alanBeckerYouTube = $"{youTubeUrl}/@alanbecker";
-    private const string youTubePrefix = $"{youTubeUrl}/watch?v=";
+    private const string vidCodePrefix = $"{youTubeUrl}/watch?v=";
 
     public static IEndpointRouteBuilder MapAvmApiEndpoints(this IEndpointRouteBuilder apiGroup)
     {
@@ -56,7 +56,7 @@ public static class AvmApi
         };
 
         return vidCode is { Length: > 0 }
-            ? $"{youTubePrefix}{vidCode}"
+            ? $"{vidCodePrefix}{vidCode}"
             : alanBeckerYouTube;
     }
 }
