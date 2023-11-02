@@ -2,7 +2,7 @@
 
 public static class HelloEndpoints
 {
-    private const string World = "World";
+    private const string World = nameof(World);
 
     public static IEndpointRouteBuilder MapHelloEndpoints(this IEndpointRouteBuilder apiGroup)
     {
