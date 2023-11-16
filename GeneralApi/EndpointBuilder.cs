@@ -8,6 +8,7 @@ public static class EndpointBuilder
 
         return app
             .MapHelloEndpoints()
-            .MapAvmApiEndpoints();
+            .MapAvmApiEndpoints()
+            .MapTerminalMontageApiEndpoints();
     }
 }
