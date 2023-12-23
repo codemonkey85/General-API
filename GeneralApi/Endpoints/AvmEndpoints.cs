@@ -52,6 +52,7 @@ public static class AvmEndpoints
             30 => "Sp2nxlrQ89w",
             31 => "mOo9iTx0aMQ",
             32 => "7UPEJjZ0UAE",
+            33 => "vlVUVsx6BYY",
             _ => string.Empty,
         };
 
