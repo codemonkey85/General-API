@@ -1,20 +1,18 @@
 ﻿namespace GeneralApi.Endpoints;
 
-public static class TerminalMontageEndpoints
+public class TerminalMontageEndpoints : IEndpoint
 {
     private const string youTubeUrl = "https://www.youtube.com";
     private const string terminalMontageYouTube = $"{youTubeUrl}/@TerminalMontage";
     private const string vidCodePrefix = $"{youTubeUrl}/watch?v=";
     private const string vidPlaylistPrefix = $"{youTubeUrl}/playlist?list=";
 
-    public static IEndpointRouteBuilder MapTerminalMontageApiEndpoints(this IEndpointRouteBuilder apiGroup)
+    public void MapEndpoints(IEndpointRouteBuilder apiGroup)
     {
         var avmGroup = apiGroup.MapGroup("/tm");
 
         avmGroup.MapGet("/", GetYouTubeUrl);
         avmGroup.MapGet("/{subject}", (string subject) => GetYouTubeUrl(subject));
-
-        return apiGroup;
     }
 
     private static string GetYouTubeUrl([FromQuery] string subject = "")

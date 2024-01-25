@@ -11,6 +11,7 @@ app
     .UseSwaggerUI()
     .UseHttpsRedirection();
 
-app.MapEndpoints();
+app.MapGet("/", () => Results.Redirect("/swagger"));
+app.MapAllEndpoints();
 
 app.Run();

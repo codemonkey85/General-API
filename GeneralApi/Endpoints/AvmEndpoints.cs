@@ -1,19 +1,17 @@
 ﻿namespace GeneralApi.Endpoints;
 
-public static class AvmEndpoints
+public class AvmEndpoints : IEndpoint
 {
     private const string youTubeUrl = "https://www.youtube.com";
     private const string alanBeckerYouTube = $"{youTubeUrl}/@alanbecker";
     private const string vidCodePrefix = $"{youTubeUrl}/watch?v=";
 
-    public static IEndpointRouteBuilder MapAvmApiEndpoints(this IEndpointRouteBuilder apiGroup)
+    public void MapEndpoints(IEndpointRouteBuilder apiGroup)
     {
         var avmGroup = apiGroup.MapGroup("/avm");
 
         avmGroup.MapGet("/", GetYouTubeUrl);
         avmGroup.MapGet("/{episodeNumber}", (int episodeNumber) => GetYouTubeUrl(episodeNumber));
-
-        return apiGroup;
     }
 
     private static string GetYouTubeUrl([FromQuery] int episodeNumber = 0)
