@@ -5,7 +5,7 @@ public class AvmEndpoints : IEndpoint
     private const string youTubeUrl = "https://www.youtube.com";
     private const string alanBeckerYouTube = $"{youTubeUrl}/@alanbecker";
     private const string vidCodePrefix = $"{youTubeUrl}/watch?v=";
-    private const string playlistCodePrefix = $"{youTubeUrl}/playlist?list="
+    private const string playlistCodePrefix = $"{youTubeUrl}/playlist?list=";
 
     public void MapEndpoints(IEndpointRouteBuilder apiGroup)
     {
