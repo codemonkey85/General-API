@@ -61,6 +61,6 @@ public class AvmEndpoints : IEndpoint
 
         return vidCode is { Length: > 0 }
             ? $"{vidCodePrefix}{vidCode}"
-            : alanBeckerYouTube;
+            : GetPlaylistUrl();
     }
 }
