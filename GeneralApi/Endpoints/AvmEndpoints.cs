@@ -57,6 +57,7 @@ public class AvmEndpoints : IEndpoint
             32 => "7UPEJjZ0UAE",
             33 => "vlVUVsx6BYY",
             34 => "CvfldRjkmW0",
+            35 => "w0bYgvYokFM",
             _ => string.Empty,
         };
 
