@@ -7,13 +7,15 @@ public class AvmEndpoints : IEndpoint
     private const string vidCodePrefix = $"{youTubeUrl}/watch?v=";
     private const string playlistCodePrefix = $"{youTubeUrl}/playlist?list=";
 
-    public void MapEndpoints(IEndpointRouteBuilder apiGroup)
+    public IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder apiGroup)
     {
         var avmGroup = apiGroup.MapGroup("/avm");
 
         avmGroup.MapGet("/", GetYouTubeUrl);
         avmGroup.MapGet("/{episodeNumber}", (int episodeNumber) => GetYouTubeUrl(episodeNumber));
         avmGroup.MapGet("/playlist", GetPlaylistUrl);
+
+        return apiGroup;
     }
     
     private static string GetPlaylistUrl() =>
