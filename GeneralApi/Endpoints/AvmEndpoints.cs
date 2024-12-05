@@ -2,23 +2,24 @@
 
 public class AvmEndpoints : IEndpoint
 {
-    private const string youTubeUrl = "https://www.youtube.com";
-    private const string vidCodePrefix = $"{youTubeUrl}/watch?v=";
-    private const string playlistCodePrefix = $"{youTubeUrl}/playlist?list=";
+    private const string YouTubeUrl = "https://www.youtube.com";
+    private const string VidCodePrefix = $"{YouTubeUrl}/watch?v=";
+    private const string PlaylistCodePrefix = $"{YouTubeUrl}/playlist?list=";
 
     public IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder apiGroup)
     {
         var avmGroup = apiGroup.MapGroup("/avm");
 
         avmGroup.MapGet("/", GetYouTubeUrl);
-        avmGroup.MapGet("/{episodeNumber}", (int episodeNumber) => GetYouTubeUrl(episodeNumber));
+        // ReSharper disable once ConvertClosureToMethodGroup
+        avmGroup.MapGet("/{episodeNumber:int}", (int episodeNumber) => GetYouTubeUrl(episodeNumber));
         avmGroup.MapGet("/playlist", GetPlaylistUrl);
 
         return apiGroup;
     }
     
     private static string GetPlaylistUrl() =>
-        $"{playlistCodePrefix}PL7z8SQeih5AdUZvp2JUdYW7WKfF9xa7Rh";
+        $"{PlaylistCodePrefix}PL7z8SQeih5AdUZvp2JUdYW7WKfF9xa7Rh";
 
     private static string GetYouTubeUrl([FromQuery] int episodeNumber = 0)
     {
@@ -63,7 +64,7 @@ public class AvmEndpoints : IEndpoint
         };
 
         return vidCode is { Length: > 0 }
-            ? $"{vidCodePrefix}{vidCode}"
+            ? $"{VidCodePrefix}{vidCode}"
             : GetPlaylistUrl();
     }
 }

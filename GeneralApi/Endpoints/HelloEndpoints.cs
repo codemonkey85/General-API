@@ -9,6 +9,7 @@ public class HelloEndpoints : IEndpoint
         var helloGroup = apiGroup.MapGroup("/hello");
 
         helloGroup.MapGet("/", HelloName);
+        // ReSharper disable once ConvertClosureToMethodGroup
         helloGroup.MapGet("/{name}", (string name) => HelloName(name));
 
         return apiGroup;

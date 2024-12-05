@@ -2,16 +2,17 @@
 
 public class TerminalMontageEndpoints : IEndpoint
 {
-    private const string youTubeUrl = "https://www.youtube.com";
-    private const string terminalMontageYouTube = $"{youTubeUrl}/@TerminalMontage";
-    private const string vidCodePrefix = $"{youTubeUrl}/watch?v=";
-    private const string vidPlaylistPrefix = $"{youTubeUrl}/playlist?list=";
+    private const string YouTubeUrl = "https://www.youtube.com";
+    private const string TerminalMontageYouTube = $"{YouTubeUrl}/@TerminalMontage";
+    private const string VidCodePrefix = $"{YouTubeUrl}/watch?v=";
+    private const string VidPlaylistPrefix = $"{YouTubeUrl}/playlist?list=";
 
     public IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder apiGroup)
     {
         var avmGroup = apiGroup.MapGroup("/tm");
 
         avmGroup.MapGet("/", GetYouTubeUrl);
+        // ReSharper disable once ConvertClosureToMethodGroup
         avmGroup.MapGet("/{subject}", (string subject) => GetYouTubeUrl(subject));
 
         return apiGroup;
@@ -51,9 +52,9 @@ public class TerminalMontageEndpoints : IEndpoint
 
         return vidCode is { Length: > 0 }
             ? playlist
-                ? $"{vidPlaylistPrefix}{vidCode}"
-                : $"{vidCodePrefix}{vidCode}"
-            : terminalMontageYouTube;
+                ? $"{VidPlaylistPrefix}{vidCode}"
+                : $"{VidCodePrefix}{vidCode}"
+            : TerminalMontageYouTube;
     }
 
     private record VideoInfo(string VidCode, bool Playlist = false);
