@@ -2,6 +2,7 @@
 
 namespace GeneralApi.Endpoints;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class BillObject
 {
     [JsonPropertyName("title")]
