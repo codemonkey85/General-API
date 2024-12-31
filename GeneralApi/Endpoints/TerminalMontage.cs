@@ -1,6 +1,6 @@
 ﻿namespace GeneralApi.Endpoints;
 
-public class TerminalMontageEndpoints : IEndpoint
+public class TerminalMontage : IEndpoint
 {
     private const string YouTubeUrl = "https://www.youtube.com";
     private const string TerminalMontageYouTube = $"{YouTubeUrl}/@TerminalMontage";

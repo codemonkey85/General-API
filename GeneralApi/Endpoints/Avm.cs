@@ -1,6 +1,6 @@
 ﻿namespace GeneralApi.Endpoints;
 
-public class AvmEndpoints : IEndpoint
+public class Avm : IEndpoint
 {
     private const string YouTubeUrl = "https://www.youtube.com";
     private const string VidCodePrefix = $"{YouTubeUrl}/watch?v=";

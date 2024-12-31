@@ -1,0 +1,17 @@
+﻿@if (Bills is { Count: > 0 })
+{
+    <div class="bills-container">
+        @foreach (var bill in Bills)
+        {
+            <div class="bill">
+                <h2>@bill.Title</h2>
+                <p>Due Date: @bill.DueDate</p>
+                <p>Amount: @bill.AmountDue</p>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    [Parameter] public List<BillObject>? Bills { get; set; }
+}
