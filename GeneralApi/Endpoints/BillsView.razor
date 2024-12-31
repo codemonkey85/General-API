@@ -12,7 +12,8 @@
             <tbody>
             @foreach (var bill in Bills)
             {
-                <tr class="@(bill.IsOverdue ? "overdue" : string.Empty)">
+                var isOverdue = DateTime.TryParse(bill.DueDate, out var dueDate) && dueDate < DateTime.Now;
+                <tr class="@(isOverdue ? "overdue" : "")">
                     <td data-label="Bill">@bill.Title</td>
                     <td data-label="Due Date">@bill.DueDateDisplay?.ToString("MM-dd-yyyy")</td>
                     <td data-label="Amount Due">@bill.AmountDueDisplay?.ToString("C")</td>
@@ -27,27 +28,22 @@ else
     <p>No bills available.</p>
 }
 
+
 <!--suppress CssUnusedSymbol -->
 <style>
-    .bills-container {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        overflow-x: auto; /* Enables horizontal scrolling for small screens */
-    }
-
+    /* Default styles for desktop/tablet */
     .bills-table {
         width: 100%;
         border-collapse: collapse;
-        margin: 0 auto;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         font-size: 1rem;
         text-align: left;
+        font-family: Arial, sans-serif; /* Use Arial font */
     }
 
     .bills-table th, .bills-table td {
         padding: 12px 15px;
         border: 1px solid #ddd;
-        white-space: nowrap; /* Prevents text wrapping */
     }
 
     .bills-table thead th {
@@ -66,68 +62,62 @@ else
         background-color: #f1f1f1;
     }
 
+    /* Overdue styles */
     .bills-table tbody tr.overdue {
-        background-color: #ffcccc; /* Highlight overdue bills with a light red background */
+        background-color: #ffcccc; /* Light red background for overdue bills */
         font-weight: bold;
     }
 
     .bills-table tbody tr.overdue:hover {
-        background-color: #ff9999; /* Highlight overdue bills on hover with a darker red background */
+        background-color: #ff9999; /* Darker red background on hover for overdue bills */
     }
 
-    /* Mobile-specific styles */
-    @@media (max-width: 600px) {
+    /* Mobile styles */
+    @@media screen and (max-width: 600px) {
         .bills-table {
-            border: 0; /* Remove table borders */
+            border: 0;
         }
 
-        .bills-table tbody, .bills-table tr, .bills-table td {
+        .bills-table thead {
+            display: none; /* Hide the header on mobile */
+        }
+
+        .bills-table tbody tr {
             display: block;
-            width: 100%;
-        }
-
-        .bills-table tr {
             margin-bottom: 15px;
-            border: 1px solid #ddd; /* Add border for each stacked row */
-            border-radius: 8px; /* Round corners for rows */
+            border: 1px solid #ddd;
+            border-radius: 5px;
             padding: 10px;
-            background-color: #ffffff; /* Set a white background for rows */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for card-like effect */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .bills-table td {
-            text-align: left; /* Align text to the left */
+        .bills-table tbody tr.overdue {
+            background-color: #ffcccc;
+        }
+
+        .bills-table tbody tr.overdue:hover {
+            background-color: #ff9999;
+        }
+
+        .bills-table tbody td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 8px 10px;
-            position: relative;
+            border: none;
+            border-bottom: 1px solid #ddd;
         }
 
-        .bills-table td::before {
-            content: attr(data-label); /* Add column headers as labels */
-            position: absolute;
-            top: 8px;
-            left: 10px;
+        .bills-table tbody td:last-child {
+            border-bottom: 0;
+        }
+
+        .bills-table tbody td::before {
+            content: attr(data-label);
             font-weight: bold;
-            color: #555;
             text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-
-        .bills-table td {
-            padding-left: 45%; /* Ensure enough space for labels */
-            font-size: 1rem; /* Make text slightly larger for readability */
-        }
-
-        .bills-table td:not(:last-child) {
-            border-bottom: 1px dashed #ddd; /* Add a dashed separator between rows */
-        }
-
-        .bills-table td[data-label="Amount Due"] {
-            color: #1a73e8; /* Highlight the "Amount Due" for emphasis */
-            font-weight: bold;
-        }
-
-        .bills-table tr:last-child {
-            margin-bottom: 0; /* Remove extra margin for the last row */
+            margin-right: 10px;
+            color: #555;
         }
     }
 </style>

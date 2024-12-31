@@ -19,6 +19,4 @@ public class BillObject
     [JsonIgnore]
     public decimal? AmountDueDisplay =>
         decimal.TryParse(AmountDue.Replace("$", string.Empty).Trim(), out var amount) ? amount : null;
-
-    [JsonIgnore] public bool IsOverdue => DueDateDisplay < DateTime.Today;
 }
