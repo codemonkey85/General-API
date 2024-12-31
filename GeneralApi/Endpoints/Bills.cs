@@ -19,7 +19,7 @@ public class Bills : IEndpoint
             return TypedResults.NotFound("No bills available.");
         }
 
-        var billsTouse = bills.Where(bill => !string.IsNullOrEmpty(bill.DueDate)).ToList();
+        var billsTouse = bills.Where(bill => bill.DueDateDisplay is not null).ToList();
 
         var componentResult = new RazorComponentResult(typeof(BillsView),
             new Dictionary<string, object?> { { nameof(BillsView.Bills), billsTouse } });
