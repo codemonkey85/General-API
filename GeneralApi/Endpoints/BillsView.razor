@@ -1,26 +1,66 @@
 ﻿@if (Bills is { Count: > 0 })
 {
     <div class="bills-container">
-        @foreach (var bill in Bills)
-        {
-            <div class="bill">
-                <h2>@bill.Title</h2>
-                <p>Due Date: @bill.DueDate</p>
-                <p>Amount: @bill.AmountDue</p>
-            </div>
-        }
+        <table class="bills-table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Due Date</th>
+                <th>Amount Due</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var bill in Bills)
+            {
+                <tr>
+                    <td>@bill.Title</td>
+                    <td>@bill.DueDate</td>
+                    <td>@bill.AmountDue</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
+}
+else
+{
+    <p>No bills available.</p>
 }
 
 <style>
     .bills-container {
         font-family: Arial, sans-serif;
         margin: 20px;
+        overflow-x: auto; /* Ensure responsiveness */
     }
 
-    .bill {
+    .bills-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .bills-table th, .bills-table td {
+        padding: 12px 15px;
         border: 1px solid #ddd;
-        padding: 10px;
-        margin-bottom: 10px;
+    }
+
+    .bills-table thead th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+    }
+
+    .bills-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .bills-table tbody tr:hover {
+        background-color: #f1f1f1;
     }
 </style>
