@@ -7,19 +7,24 @@ public class Bills : IEndpoint
         var billsGroup = apiGroup.MapGroup("/bills");
 
         billsGroup.MapPost("/",
-            async (HttpContext context, [FromBody] List<BillObject> bills) => await FormatBills(context, bills));
+            async (HttpContext context, [FromBody] List<BillObject> bills, [FromQuery] int daysAhead = 0) => await FormatBills(context, bills, daysAhead));
 
         return apiGroup;
     }
 
-    private static async Task<IResult> FormatBills(HttpContext context, List<BillObject> bills)
+    private static async Task<IResult> FormatBills(HttpContext context, List<BillObject> bills, int daysAhead = 0)
     {
         if (bills.Count == 0)
         {
             return TypedResults.NotFound("No bills available.");
         }
 
-        var billsTouse = bills.Where(bill => bill.DueDateDisplay is not null).ToList();
+        var billsTouse = bills
+            .Where(bill => bill.DueDateDisplay is not null && (daysAhead == 0 || daysAhead > 0 && bill.DueDateDisplay.Value.Date <= DateTime.Today.AddDays(14).Date))
+            .OrderBy(bill => bill.DueDateDisplay)
+            .ThenBy(bill => bill.Title)
+            .ThenByDescending(bill => bill.AmountDueDisplay)
+            .ToList();
 
         var componentResult = new RazorComponentResult(typeof(BillsView),
             new Dictionary<string, object?> { { nameof(BillsView.Bills), billsTouse } });
