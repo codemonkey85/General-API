@@ -19,8 +19,10 @@ public class Bills : IEndpoint
             return TypedResults.NotFound("No bills available.");
         }
 
+        var billsTouse = bills.Where(bill => !string.IsNullOrEmpty(bill.DueDate)).ToList();
+
         var componentResult = new RazorComponentResult(typeof(BillsView),
-            new Dictionary<string, object?> { { nameof(BillsView.Bills), bills } });
+            new Dictionary<string, object?> { { nameof(BillsView.Bills), billsTouse } });
 
         // Use the RazorComponentResult to render and write directly to the response
         await componentResult.ExecuteAsync(context);
