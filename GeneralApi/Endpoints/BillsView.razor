@@ -12,7 +12,7 @@
             <tbody>
             @foreach (var bill in Bills)
             {
-                <tr>
+                <tr class="@(bill.IsOverdue ? "overdue" : string.Empty)">
                     <td data-label="Bill">@bill.Title</td>
                     <td data-label="Due Date">@bill.DueDateDisplay?.ToString("MM-dd-yyyy")</td>
                     <td data-label="Amount Due">@bill.AmountDueDisplay?.ToString("C")</td>
@@ -27,6 +27,7 @@ else
     <p>No bills available.</p>
 }
 
+<!--suppress CssUnusedSymbol -->
 <style>
     .bills-container {
         font-family: Arial, sans-serif;
@@ -63,6 +64,15 @@ else
 
     .bills-table tbody tr:hover {
         background-color: #f1f1f1;
+    }
+
+    .bills-table tbody tr.overdue {
+        background-color: #ffcccc; /* Highlight overdue bills with a light red background */
+        font-weight: bold;
+    }
+
+    .bills-table tbody tr.overdue:hover {
+        background-color: #ff9999; /* Highlight overdue bills on hover with a darker red background */
     }
 
     /* Mobile-specific styles */
