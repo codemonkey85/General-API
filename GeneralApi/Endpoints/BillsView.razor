@@ -1,4 +1,10 @@
-﻿@if (Bills is { Count: > 0 })
+﻿@using Microsoft.AspNetCore.Components.Web
+
+<HeadContent>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</HeadContent>
+
+@if (Bills is { Count: > 0 })
 {
     <div class="bills-container">
         <table class="bills-table">
@@ -31,14 +37,14 @@ else
 
 <!--suppress CssUnusedSymbol -->
 <style>
-    /* Default styles for desktop/tablet */
+    /* General styles for the table */
     .bills-table {
         width: 100%;
         border-collapse: collapse;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         font-size: 1rem;
         text-align: left;
-        font-family: Arial, sans-serif; /* Use Arial font */
+        font-family: Arial, sans-serif;
     }
 
     .bills-table th, .bills-table td {
@@ -72,14 +78,14 @@ else
         background-color: #ff9999; /* Darker red background on hover for overdue bills */
     }
 
-    /* Mobile styles */
-    @@media screen and (max-width: 600px) {
+    /* Force responsive table for smaller screens */
+    @@media screen and (max-width: 812px) {
         .bills-table {
             border: 0;
         }
 
         .bills-table thead {
-            display: none; /* Hide the header on mobile */
+            display: none; /* Hide header for mobile */
         }
 
         .bills-table tbody tr {
@@ -93,10 +99,6 @@ else
 
         .bills-table tbody tr.overdue {
             background-color: #ffcccc;
-        }
-
-        .bills-table tbody tr.overdue:hover {
-            background-color: #ff9999;
         }
 
         .bills-table tbody td {
@@ -118,6 +120,7 @@ else
             text-transform: uppercase;
             margin-right: 10px;
             color: #555;
+            flex-shrink: 0;
         }
     }
 </style>
