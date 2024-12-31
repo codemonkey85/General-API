@@ -1,6 +1,6 @@
 ﻿namespace GeneralApi.Endpoints;
 
-public class HelloEndpoints : IEndpoint
+public class Hello : IEndpoint
 {
     private const string World = nameof(World);
 

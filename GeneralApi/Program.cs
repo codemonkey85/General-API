@@ -1,8 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
-builder.Services
+services
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen();
+    .AddSwaggerGen()
+    .AddRazorComponents();
 
 var app = builder.Build();
 
