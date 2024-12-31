@@ -14,8 +14,8 @@
             {
                 <tr>
                     <td>@bill.Title</td>
-                    <td>@bill.DueDate</td>
-                    <td>@bill.AmountDue</td>
+                    <td>@bill.DueDateDisplay?.ToString("MM-dd-yyyy")</td>
+                    <td>@bill.AmountDueDisplay?.ToString("C")</td>
                 </tr>
             }
             </tbody>
