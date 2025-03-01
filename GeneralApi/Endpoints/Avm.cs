@@ -14,12 +14,16 @@ public class Avm : IEndpoint
         // ReSharper disable once ConvertClosureToMethodGroup
         avmGroup.MapGet("/{episodeNumber:int}", (int episodeNumber) => GetYouTubeUrl(episodeNumber));
         avmGroup.MapGet("/playlist", GetPlaylistUrl);
+        avmGroup.MapGet("/coding", () => GetMiscUrl("EFmxPMdBqmU"));
 
         return apiGroup;
     }
     
     private static string GetPlaylistUrl() =>
         $"{PlaylistCodePrefix}PL7z8SQeih5AdUZvp2JUdYW7WKfF9xa7Rh";
+
+    private static string GetMiscUrl(string vidCode) =>
+        $"{VidCodePrefix}{vidCode}";
 
     private static string GetYouTubeUrl([FromQuery] int episodeNumber = 0)
     {
