@@ -1,16 +1,14 @@
+const string CorsPolicyName = "AllowAll";
+
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
-// 1. Add CORS services and define a policy
-services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
-});
+var appSettings = builder.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
+
+services.AddCors(options => options.AddPolicy(CorsPolicyName, policy => policy
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()));
 
 services
     .AddEndpointsApiExplorer()
@@ -24,10 +22,10 @@ app
     .UseSwaggerUI()
     .UseHttpsRedirection();
 
-// 2. Use the CORS middleware before mapping endpoints
-app.UseCors("AllowAll");
+app.UseCors(CorsPolicyName);
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
 app.MapAllEndpoints();
+app.MapNowEndpoints(appSettings);
 
 app.Run();
