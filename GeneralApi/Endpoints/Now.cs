@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace GeneralApi.Endpoints;
+﻿namespace GeneralApi.Endpoints;
 
 public class Now : IEndpoint
 {
