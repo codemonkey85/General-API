@@ -18,7 +18,7 @@ public class Avm : IEndpoint
 
         return apiGroup;
     }
-    
+
     private static string GetPlaylistUrl() =>
         $"{PlaylistCodePrefix}PL7z8SQeih5AdUZvp2JUdYW7WKfF9xa7Rh";
 
@@ -64,7 +64,7 @@ public class Avm : IEndpoint
             33 => "vlVUVsx6BYY",
             34 => "CvfldRjkmW0",
             35 => "w0bYgvYokFM",
-            _ => string.Empty,
+            _ => string.Empty
         };
 
         return vidCode is { Length: > 0 }

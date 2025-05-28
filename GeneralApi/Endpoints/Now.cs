@@ -2,9 +2,8 @@
 
 public class Now : IEndpoint
 {
-    private static List<NowThing> nowThings = [];
-
     private const string NowThingsFile = "nowthings.json";
+    private static List<NowThing> nowThings = [];
 
     public Now() => LoadNowThings();
 

@@ -11,8 +11,8 @@ public class EndpointsGenerator : IIncrementalGenerator
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var provider = context.SyntaxProvider.CreateSyntaxProvider(
-            (node, _) => node is ClassDeclarationSyntax,
-            (syntaxContext, _) => (ClassDeclarationSyntax)syntaxContext.Node)
+                (node, _) => node is ClassDeclarationSyntax,
+                (syntaxContext, _) => (ClassDeclarationSyntax)syntaxContext.Node)
             .Where(x => x is not null);
 
         var compilation = context.CompilationProvider.Combine(provider.Collect());
@@ -44,7 +44,8 @@ public class EndpointsGenerator : IIncrementalGenerator
 
         List<string> endpointClassesSymbolNames =
         [
-            .. from syntax in classes
+            ..
+            from syntax in classes
             let symbol = compilation.GetSemanticModel(syntax.SyntaxTree).GetDeclaredSymbol(syntax) as INamedTypeSymbol
             where symbol is { Name.Length: > 0 }
             where symbol.AllInterfaces.Any(i => i.Name == InterfaceName)
