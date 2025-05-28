@@ -32,7 +32,7 @@ public static class NowEndpoints
                 {
                     Title = record.GetField<string>("Title") ?? string.Empty,
                     Description = record.GetField<string>("Description") ?? string.Empty,
-                    Url = record.GetField<string>("Url")
+                    Url = record.GetField<string>("URL")
                 });
             }
 
