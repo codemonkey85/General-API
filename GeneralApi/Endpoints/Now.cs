@@ -1,20 +1,20 @@
 ﻿namespace GeneralApi.Endpoints;
 
-public static class NowEndpoints
+public class Now : IEndpoint
 {
-    public static IEndpointRouteBuilder MapNowEndpoints(
-        this IEndpointRouteBuilder app,
-        AppSettings? appSettings)
+    public IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder apiGroup)
     {
-        var nowGroup = app.MapGroup("/now");
+        var nowGroup = apiGroup.MapGroup("/now");
 
-        nowGroup.MapGet("/", async () => await GetNowThings(appSettings));
+        nowGroup.MapGet("/", GetNowThings);
 
-        return app;
+        return apiGroup;
     }
 
-    private static async Task<IResult> GetNowThings(AppSettings? appSettings)
+    private static async Task<IResult> GetNowThings([AsParameters] NowDependencies deps)
     {
+        var appSettings = deps.AppSettings;
+
         if (appSettings is not { AppKey: { } appKey, BaseId: { } baseId })
         {
             return Results.InternalServerError();
@@ -40,6 +40,11 @@ public static class NowEndpoints
         }
 
         return Results.Problem(response.AirtableApiError.Message ?? "Failed to load now things.");
+    }
+
+    private sealed class NowDependencies
+    {
+        public AppSettings AppSettings { get; init; } = default!;
     }
 
     private readonly record struct NowThing
