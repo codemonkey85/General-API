@@ -13,6 +13,10 @@ services
     .AddSwaggerGen()
     .AddRazorComponents();
 
+services
+    .Configure<AppSettings>(builder.Configuration.GetSection(AppSettings.SectionName))
+    .AddSingleton(sp => sp.GetRequiredService<IOptions<AppSettings>>().Value);
+
 var app = builder.Build();
 
 app
@@ -23,6 +27,7 @@ app
 app.UseCors(CorsPolicyName);
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.MapAllEndpoints();
 
 app.Run();
