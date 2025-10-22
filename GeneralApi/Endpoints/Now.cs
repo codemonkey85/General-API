@@ -44,7 +44,7 @@ public class Now : IEndpoint
 
     private sealed class NowDependencies
     {
-        public AppSettings AppSettings { get; init; } = default!;
+        public AppSettings AppSettings { get; } = default!;
     }
 
     private readonly record struct NowThing
