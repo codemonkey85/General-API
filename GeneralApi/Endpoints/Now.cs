@@ -45,7 +45,8 @@ public class Now : IEndpoint
     private sealed class NowDependencies
     {
         // ReSharper disable once ReplaceAutoPropertyWithComputedProperty
-        public AppSettings AppSettings { get; } = null!;
+        // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
+        public AppSettings AppSettings { get; init; } = null!;
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
