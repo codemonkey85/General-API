@@ -5,8 +5,8 @@ public class AppSettings
     public const string SectionName = "AppSettings";
 
     [JsonPropertyName("baseId")]
-    public string? BaseId { get; set; }
+    public string? BaseId { get; init; }
 
     [JsonPropertyName("appKey")]
-    public string? AppKey { get; set; }
+    public string? AppKey { get; init; }
 }

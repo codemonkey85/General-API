@@ -112,7 +112,7 @@
                 var isOverdue = DateTime.TryParse(bill.DueDate, out var dueDate) && dueDate < DateTime.Now;
                 <tr class="@(isOverdue
                                ? "overdue"
-                               : "")">
+                               : string.Empty)">
                     <td data-label="Bill">@bill.Title</td>
                     <td data-label="Due Date">@bill.DueDateDisplay?.ToString("MM-dd-yyyy")</td>
                     <td data-label="Amount Due">@bill.AmountDueDisplay?.ToString("C")</td>

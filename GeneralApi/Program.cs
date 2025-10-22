@@ -1,9 +1,9 @@
-const string CorsPolicyName = "AllowAll";
+const string corsPolicyName = "AllowAll";
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
-services.AddCors(options => options.AddPolicy(CorsPolicyName, policy => policy
+services.AddCors(options => options.AddPolicy(corsPolicyName, policy => policy
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader()));
@@ -24,7 +24,7 @@ app
     .UseSwaggerUI()
     .UseHttpsRedirection();
 
-app.UseCors(CorsPolicyName);
+app.UseCors(corsPolicyName);
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
 

@@ -1,4 +1,6 @@
-﻿namespace GeneralApi.Endpoints;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GeneralApi.Endpoints;
 
 public class Now : IEndpoint
 {
@@ -23,30 +25,30 @@ public class Now : IEndpoint
         using var airtableBase = new AirtableBase(appKey, baseId);
         var response = await airtableBase.ListRecords("NowThings");
 
-        if (response.Success)
+        if (response is not { Success: true, Records: not null })
         {
-            List<NowThing> nowThings = [];
-            foreach (var record in response.Records)
-            {
-                nowThings.Add(new NowThing
-                {
-                    Title = record.GetField<string>("Title") ?? string.Empty,
-                    Description = record.GetField<string>("Description") ?? string.Empty,
-                    Url = record.GetField<string>("URL")
-                });
-            }
-
-            return Results.Ok(nowThings);
+            return Results.Problem(response.AirtableApiError?.Message ?? "Failed to load now things.");
         }
 
-        return Results.Problem(response.AirtableApiError.Message ?? "Failed to load now things.");
+        var nowThings = response.Records
+            .Select(record => new NowThing
+            {
+                Title = record.GetField<string>("Title") ?? string.Empty,
+                Description = record.GetField<string>("Description") ?? string.Empty,
+                Url = record.GetField<string>("URL")
+            }).ToList();
+
+        return Results.Ok(nowThings);
     }
 
+    // ReSharper disable once ClassNeverInstantiated.Local
     private sealed class NowDependencies
     {
-        public AppSettings AppSettings { get; init; } = default!;
+        // ReSharper disable once ReplaceAutoPropertyWithComputedProperty
+        public AppSettings AppSettings { get; } = null!;
     }
 
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
     private readonly record struct NowThing
     {
         public string Title { get; init; }
