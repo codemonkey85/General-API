@@ -3,8 +3,8 @@
 namespace GeneralApi.Endpoints;
 
 // ReSharper disable once ClassNeverInstantiated.Global
-[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-[SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global"), 
+ SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
 public class BillObject
 {
     [JsonPropertyName("title")]
