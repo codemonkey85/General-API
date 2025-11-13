@@ -12,13 +12,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Airtable" Version="1.8.0" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
+        <PackageReference Include="Airtable" Version="1.8.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ApiSourceGenerator\ApiSourceGenerator.csproj" OutputItemType="Analyzer" />
+        <ProjectReference Include="..\ApiSourceGenerator\ApiSourceGenerator.csproj" OutputItemType="Analyzer"/>
     </ItemGroup>
 
 </Project>
